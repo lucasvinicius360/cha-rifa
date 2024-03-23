@@ -1,4 +1,4 @@
-import 'package:cha_rifa/widget/drawer/drawer.dart';
+import 'package:cha_rifa/widgets/drawer/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:google_fonts/google_fonts.dart';

@@ -1,5 +1,8 @@
+import 'package:cha_rifa/screens/add/add.dart';
+import 'package:cha_rifa/screens/home/home_page_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 
 class DrawerThree extends StatefulWidget {
@@ -37,7 +40,7 @@ class _DrawerThreeState extends State<DrawerThree> {
             UserAccountsDrawerHeader(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/IMG1.jpg'),
+                  image: AssetImage('assets/images/backDrawer1.jpg'),
                   fit: BoxFit.cover,
                 )
               ),
@@ -90,11 +93,11 @@ class _DrawerThreeState extends State<DrawerThree> {
                     onTap: () {
                       // Atualiza o destino selecionado e navega para a tela Home
                       selectDestination(0);
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => Home(),
-                      //     ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ));
                     },
                     selectedColor:
                         _selectedDestination == 0 ? Colors.white : Colors.blue),
@@ -139,14 +142,14 @@ class _DrawerThreeState extends State<DrawerThree> {
                     onTap: () {
                       // Atualiza o destino selecionado e navega para a tela de Forms
                       selectDestination(1);
-                      // Navigator.push(
-                      //     context,
-                      //     PageTransition(
-                      //       child: const FormExample(),
-                      //       type: PageTransitionType.size,
-                      //       alignment: Alignment.center,
-                      //       duration: const Duration(milliseconds: 700),
-                      //     ));
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                            child:  AddUserScreen(),
+                            type: PageTransitionType.size,
+                            alignment: Alignment.center,
+                            duration: const Duration(milliseconds: 700),
+                          ));
                     },
                     selectedColor:
                         _selectedDestination == 1 ? Colors.white : Colors.blue),

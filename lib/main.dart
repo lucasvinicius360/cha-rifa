@@ -1,4 +1,4 @@
-import 'package:cha_rifa/screen/home/home_page_view.dart';
+import 'package:cha_rifa/screens/home/home_page_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
