@@ -28,7 +28,7 @@ class DB {
 
   _onCreate(db, versao) async {
     await db.execute(
-      _users,
+      _getUsers,
     );
   }
 
@@ -37,11 +37,16 @@ class DB {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT, 
       payment BOOLEAN 
+      number INTEGER
       
     )
   ''';
 
   String get _getUsers => ''' 
-    SELECT * FROM users
+    ALTER TABLE users ADD COLUMN number INTEGER;
     ''';
+
+  Future<void> adicionarColunaNumber(Database db) async {
+  await db.execute('ALTER TABLE users ADD COLUMN number INTEGER');
+  }
 }

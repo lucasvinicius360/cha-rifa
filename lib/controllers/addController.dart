@@ -13,21 +13,23 @@ class UsersRepositores extends ChangeNotifier {
   }
 
   _init() async {
+
     await getUsers();
   }
 
   getUsers() async {
     db = await DB.instance.database;
+    // db.execute('ALTER TABLE users ADD COLUMN number INTEGER');
     _users = await db.query('users');
     notifyListeners();
     return _users; 
   }
 
-  addUsers(String name, String email, String password) async {
+  addUsers(String name, int email, bool checkValue) async {
     db = await DB.instance.database;
     await db.insert(
       'users',
-      {'name': name, 'email': email, 'password': password},
+      {'name': name, 'number': email, 'payment': checkValue},
     );
     await getUsers(); // Atualiza a lista de usuários após a inserção
   }
