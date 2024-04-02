@@ -4,6 +4,6 @@ class User {
   bool payment;
   int number;
 
-  User(this.name, this.payment,this.number);
+  User(this.id,this.name, this.payment,this.number);
 
 }

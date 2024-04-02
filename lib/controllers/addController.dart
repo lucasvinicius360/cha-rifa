@@ -34,11 +34,18 @@ class UsersRepositores extends ChangeNotifier {
     await getUsers(); // Atualiza a lista de usuários após a inserção
   }
 
-  updateUsers(int id, String name, String email, String password) async {
+  getUserById(int id) async {
+    db = await DB.instance.database;
+    List<Map<String, dynamic>> user =
+        await db.query('users', where: 'id = ?', whereArgs: [id]);
+    return user.first;
+  }
+
+  updateUsers(int id, String name, int email, bool checkValue) async {
     db = await DB.instance.database;
     await db.update(
       'users',
-      {'name': name, 'email': email, 'password': password},
+      {'name': name, 'number': email, 'payment': checkValue},
       where: 'id = ?',
       whereArgs: [id],
     );
