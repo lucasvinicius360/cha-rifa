@@ -4,6 +4,7 @@ import 'package:cha_rifa/widgets/dropDown/drop_page.dart';
 import 'package:cha_rifa/widgets/fields/fields.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cha_rifa/screens/home/home_page_view.dart';
 
 class AddUserScreen extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerThree(),
+      drawer: DrawerThree(initialSelectedDestination : 1),
       appBar: AppBar(
         title: Text(
           'Adicionar Chá Rifa',
@@ -56,7 +57,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                 Column(
                   children: [
                     Text(
-                      'Seleciome um numero',
+                      'Selecione um numero',
                       style: GoogleFonts.pacifico(
                         fontWeight: FontWeight.w500,
                         fontSize: 17,
@@ -120,7 +121,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                       decoration: getFieldName(''),
                       // icon: Icon(CupertinoIcons.list_number),
                       isExpanded: true,
-                      hint: Text('Selecione um item'),
+                      hint: Text('Selecione...'),
                       value: (value.isEmpty) ? null : value,
                       onChanged: (value) => {
                             valueListenable.value = value.toString(),
@@ -151,9 +152,14 @@ class _AddUserScreenState extends State<AddUserScreen> {
           backgroundColor: Colors.greenAccent, elevation: 10),
       onPressed: () {
         int numbers = int.parse(selectedItem);
+
         usersRepository.addUsers(nameController.text, numbers, checkValue);
-        Navigator.pop(
-            context); // Retorna à tela anterior após adicionar o usuário
+
+        Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        )); // Retorna à tela anterior após adicionar o usuário
       },
       child: Text(
         'Adicionar Usuário',

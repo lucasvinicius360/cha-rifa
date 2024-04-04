@@ -2,6 +2,7 @@ import 'package:cha_rifa/screens/add/add.dart';
 import 'package:cha_rifa/screens/home/home_page_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 
@@ -44,7 +45,11 @@ class _DrawerThreeState extends State<DrawerThree> {
                   fit: BoxFit.cover,
                 )
               ),
-              accountName: Text('Lucas Development'),
+              accountName: Text('Lucas Development',style: GoogleFonts.bebasNeue(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 253, 253, 253),
+                        ),),
               accountEmail: null,
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
@@ -63,8 +68,10 @@ class _DrawerThreeState extends State<DrawerThree> {
                 // Destaca a barra lateral se o destino estiver selecionado
                 _selectedDestination == 0
                     ? Positioned(
-                        width: 300,
+                        // width: 320,
                         height: 56,
+                        left: 10,
+                        right: 5,
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.blue,
@@ -88,7 +95,11 @@ class _DrawerThreeState extends State<DrawerThree> {
                       height: 34,
                       width: 34,
                     ),
-                    title: Text('Home'),
+                    title: Text('Home',style: GoogleFonts.bebasNeue(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 18, 18, 18),
+                        ),),
                     selected: _selectedDestination == 0,
                     onTap: () {
                       // Atualiza o destino selecionado e navega para a tela Home
@@ -133,11 +144,15 @@ class _DrawerThreeState extends State<DrawerThree> {
                 // O item real no Drawer
                 ListTile(
                     leading: SizedBox(
-                      child: Icon(CupertinoIcons.table_fill),
+                      child: Icon(CupertinoIcons.person_add_solid),
                       height: 34,
                       width: 34,
                     ),
-                    title: Text('Forms'),
+                    title: Text('Adicionar Rifa',style: GoogleFonts.bebasNeue(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 18, 18, 18),
+                        ),),
                     selected: _selectedDestination == 1,
                     onTap: () {
                       // Atualiza o destino selecionado e navega para a tela de Forms
@@ -184,7 +199,11 @@ class _DrawerThreeState extends State<DrawerThree> {
                 ListTile(
                     leading:
                         SizedBox(child: Icon(CupertinoIcons.settings_solid)),
-                    title: Text('Settings'),
+                    title: Text('Settings',style: GoogleFonts.bebasNeue(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 18, 18, 18),
+                        ),),
                     selected: _selectedDestination == 2,
                     onTap: () {
                       selectDestination(2);
@@ -195,6 +214,7 @@ class _DrawerThreeState extends State<DrawerThree> {
             ),
 
             // Divisor e rótulo
+            SizedBox(height: 10),
             Divider(
               height: 1,
               thickness: 1,
@@ -202,7 +222,11 @@ class _DrawerThreeState extends State<DrawerThree> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Label',
+                'Label',style: GoogleFonts.bebasNeue(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 18, 18, 18),
+                        ),
               ),
             ),
 
@@ -233,7 +257,11 @@ class _DrawerThreeState extends State<DrawerThree> {
                     : SizedBox(),
                 ListTile(
                     leading: Icon(CupertinoIcons.camera_circle_fill),
-                    title: Text('Back to Home'),
+                    title: Text('Back to Home',style: GoogleFonts.bebasNeue(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 18, 18, 18),
+                        ),),
                     selected: _selectedDestination == 3,
                     onTap: () {
                       selectDestination(3);

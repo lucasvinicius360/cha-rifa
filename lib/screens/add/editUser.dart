@@ -1,27 +1,7 @@
 import 'package:flutter/material.dart';
 
-// class EditUser extends StatefulWidget {
-
-//   const EditUser({ super.key });
-
-//   @override
-//   State<EditUser> createState() => _EditUserState();
-// }
-
-// class _EditUserState extends State<EditUser> {
-
-//    @override
-//    Widget build(BuildContext context) {
-//        return Scaffold(
-//            appBar: AppBar(title: const Text(''),),
-//            body: Container(),
-//        );
-//   }
-// }
-
-
 import 'package:cha_rifa/model/user.dart';
-import 'package:flutter/material.dart';
+import 'package:cha_rifa/screens/home/home_page_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cha_rifa/controllers/addController.dart';
 import 'package:cha_rifa/widgets/drawer/drawer.dart';
@@ -86,7 +66,7 @@ class _EditUserState extends State<EditUser> {
                 Column(
                   children: [
                     Text(
-                      'Seleciome um numero',
+                      'Selecione um numero',
                       style: GoogleFonts.pacifico(
                         fontWeight: FontWeight.w500,
                         fontSize: 17,
@@ -137,27 +117,37 @@ class _EditUserState extends State<EditUser> {
   Widget buildDropDown() => DropPage();
 
   Widget buildSaveButton(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.greenAccent,
-        elevation: 10,
-      ),
-      onPressed: () {
-        int numbers = int.parse(selectedItem);
-        if(widget.user?.id != null){
-          usersRepository.updateUsers(widget.user!.id, widget.user!.name, widget.user!.number, widget.user!.payment);
-        }else{
-          usersRepository.addUsers(nameController.text, numbers, checkValue);
+  return ElevatedButton( // Retorna um botão elevado.
+    style: ElevatedButton.styleFrom( // Estilo do botão elevado.
+      backgroundColor: Colors.greenAccent, // Cor de fundo do botão.
+      elevation: 10, // Elevação do botão.
+    ),
+    onPressed: () { // Função de callback quando o botão é pressionado.
+      int numbers = int.parse(selectedItem); // Converte o valor selecionado para inteiro.
 
-        }
-        Navigator.pop(context);
-      },
-      child: Text(
-        'Adicionar Usuário',
-        style: TextStyle(color: Colors.white, fontSize: 16),
-      ),
-    );
-  }
+      // Atualiza os dados do usuário com os valores fornecidos.
+      usersRepository.updateUsers(
+        widget.user!.id, // ID do usuário.
+        widget.user!.name, // Nome do usuário.
+        numbers, // Número selecionado.
+        checkValue, // Valor booleano indicando se a fralda foi recebida ou não.
+      );
+
+      // Navega de volta para a página inicial (HomePage).
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(), // Constrói a página inicial (HomePage).
+        ),
+      );
+    },
+    child: Text( // Texto exibido no botão.
+      'Adicionar Usuário', // Texto do botão.
+      style: TextStyle(color: Colors.white, fontSize: 16), // Estilo do texto.
+    ),
+  );
+}
+
 
   Widget buildFieldEmail() {
     return Column(
@@ -214,8 +204,9 @@ class _EditUserState extends State<EditUser> {
                 child: DropdownButtonFormField(
                   borderRadius: BorderRadius.circular(15),
                   iconEnabledColor: Colors.blue,
+                  decoration: getFieldName(''),
                   isExpanded: true,
-                  hint: Text('Selecione um item'),
+                  hint: Text('Selecione...',),
                   value: (value.isEmpty) ? null : value,
                   onChanged: (value) {
                     valueListenable.value = value.toString();

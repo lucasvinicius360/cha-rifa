@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                   // height: 100,
                   margin: EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    // color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     boxShadow: [
                       BoxShadow(
@@ -71,6 +71,14 @@ class _HomePageState extends State<HomePage> {
                         offset: Offset(0, 3),
                       ),
                     ],
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Colors.white,
+                        Colors.blue,
+                      ],
+                    ),
                   ),
                   child: Center(
                     child: ListTile(
@@ -95,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                         'N°: ' + users[index]['number'].toString(),
                         style: GoogleFonts.bebasNeue(
                           fontWeight: FontWeight.w500,
-                          fontSize: 20,
+                          fontSize: 30,
                           color: Color.fromARGB(255, 18, 18, 18),
                         ),
                       ),
@@ -111,6 +119,7 @@ class _HomePageState extends State<HomePage> {
                               color: users[index]['payment'] == 1
                                   ? const Color.fromARGB(255, 44, 243, 33)
                                   : Colors.red,
+                              iconSize: 30,
                             ),
                             IconEdit(User(
                                 users[index]['id'],

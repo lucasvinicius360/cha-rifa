@@ -14,6 +14,7 @@ class IconDelete extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(Icons.delete),
+      iconSize: 30,
       onPressed: () {
         showDialog(
           context: context,

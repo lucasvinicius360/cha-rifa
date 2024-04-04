@@ -13,6 +13,7 @@ class IconEdit extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(Icons.edit),
+      iconSize: 30,
       onPressed: () {
         showDialog(
           context: context,
@@ -46,7 +47,7 @@ class IconEdit extends StatelessWidget {
           },
         );
       },
-      color: Colors.blue,
+      color: Colors.white,
     );
   }
 }
