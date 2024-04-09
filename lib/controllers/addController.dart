@@ -13,7 +13,6 @@ class UsersRepositores extends ChangeNotifier {
   }
 
   _init() async {
-
     await getUsers();
   }
 
@@ -22,7 +21,7 @@ class UsersRepositores extends ChangeNotifier {
     // db.execute('ALTER TABLE users ADD COLUMN number INTEGER');
     _users = await db.query('users');
     notifyListeners();
-    return _users; 
+    return _users;
   }
 
   addUsers(String name, int email, bool checkValue) async {
@@ -61,4 +60,18 @@ class UsersRepositores extends ChangeNotifier {
     );
     await getUsers(); // Atualiza a lista de usuários após a exclusão
   }
+
+  Future<List<Map<String, dynamic>>> getNumbers() async {
+  final db = await DB.instance.database;
+  var results = await db.query('users', columns: ['number']);
+  List<Map<String, dynamic>> numbers = [];
+  for (var result in results) {
+    numbers.add({'number': result['number']});
+  }
+  return numbers;
+}
+
+
+
+
 }

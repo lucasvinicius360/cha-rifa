@@ -1,8 +1,10 @@
 import 'package:cha_rifa/controllers/addController.dart';
+import 'package:cha_rifa/screens/add/addStore.dart';
 import 'package:cha_rifa/widgets/drawer/drawer.dart';
 import 'package:cha_rifa/widgets/dropDown/drop_page.dart';
 import 'package:cha_rifa/widgets/fields/fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cha_rifa/screens/home/home_page_view.dart';
 
@@ -20,16 +22,30 @@ class _AddUserScreenState extends State<AddUserScreen> {
 
   final ValueNotifier<String> valueListenable = ValueNotifier('');
 
-  final List<int> items = List<int>.generate(100, (index) => index + 1);
+  final AddStore addStore = AddStore(); // Adicione esta linha
+
+  List<int> items = [];
 
   bool checkValue = true;
 
   String selectedItem = '';
 
   @override
+  void initState() {
+    super.initState();
+    addStore.getNumbers(); // Chame a função getNumbers() ao iniciar o estado
+    usersRepository.getNumbers().then((data) {
+      setState(() {
+        items = data.map<int>((item) => item['number']).toList();
+      });
+      print(items);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerThree(initialSelectedDestination : 1),
+      drawer: DrawerThree(initialSelectedDestination: 1),
       appBar: AppBar(
         title: Text(
           'Adicionar Chá Rifa',
@@ -64,7 +80,9 @@ class _AddUserScreenState extends State<AddUserScreen> {
                         color: Color.fromARGB(255, 18, 18, 18),
                       ),
                     ),
-                    BuildDropDown1(),
+                    Observer(
+                      builder: (_) => BuildDropDown1(),
+                    )
                   ],
                 ),
                 SizedBox(width: 20),
@@ -102,46 +120,56 @@ class _AddUserScreenState extends State<AddUserScreen> {
   }
 
   BuildDropDown1() {
-    return ValueListenableBuilder(
-        valueListenable: valueListenable,
-        builder: (context, value, child) {
-          return Card(
-            color: Colors.grey[100],
-            elevation: 8,
-            child: Container(
-              child: SizedBox(
-                width: 150,
-                height: 50,
-                child: Padding(
-                  padding:
-                      EdgeInsets.all(3.5), // Definindo padding de 16 pixels
-                  child: DropdownButtonFormField(
-                      borderRadius: BorderRadius.circular(15),
-                      iconEnabledColor: Colors.blue,
-                      decoration: getFieldName(''),
-                      // icon: Icon(CupertinoIcons.list_number),
-                      isExpanded: true,
-                      hint: Text('Selecione...'),
-                      value: (value.isEmpty) ? null : value,
-                      onChanged: (value) => {
+    return Observer(
+        builder: (_) => ValueListenableBuilder(
+              valueListenable: valueListenable,
+              builder: (context, value, child) {
+                return Card(
+                  color: Colors.grey[100],
+                  elevation: 8,
+                  child: Container(
+                    child: SizedBox(
+                      width: 150,
+                      height: 50,
+                      child: Padding(
+                        padding: EdgeInsets.all(3.5),
+                        child: DropdownButtonFormField<String>(
+                          // Alteração aqui
+                          borderRadius: BorderRadius.circular(15),
+                          iconEnabledColor: Colors.blue,
+                          decoration: getFieldName(''),
+                          isExpanded: true,
+                          hint: Text('Selecione...'),
+                          value: (value.isEmpty) ? null : value,
+                          onChanged: (value) => {
                             valueListenable.value = value.toString(),
                             setState(() {
                               selectedItem = value.toString();
                             })
                           },
-                      items: items
-                          .map(
-                            (e) => DropdownMenuItem(
-                              child: Text('Numero: ' + e.toString()),
-                              value: e.toString(),
-                            ),
-                          )
-                          .toList()),
-                ),
-              ),
-            ),
-          );
-        });
+                          items: (addStore.unsaved)
+                              .cast<int>()
+                              .map<DropdownMenuItem<String>>(
+                                // Alteração aqui
+                                (e) => DropdownMenuItem<String>(
+                                  // Alteração aqui
+                                  child: Text('Numero: ' + e.toString(),
+                                      style: GoogleFonts.bebasNeue(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 20,
+                                        color: Color.fromARGB(255, 18, 18, 18),
+                                      )),
+                                  value: e.toString(),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ));
   }
 
   DropPage buildDropDown() => DropPage();
@@ -156,10 +184,10 @@ class _AddUserScreenState extends State<AddUserScreen> {
         usersRepository.addUsers(nameController.text, numbers, checkValue);
 
         Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        )); // Retorna à tela anterior após adicionar o usuário
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(),
+            )); // Retorna à tela anterior após adicionar o usuário
       },
       child: Text(
         'Adicionar Usuário',
