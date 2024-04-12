@@ -51,6 +51,7 @@ dependencies:
   bloc_concurrency: ^0.2.5
   bloc: ^8.1.4
   circular_seek_bar: ^1.1.1
+  graphic: ^2.2.1
 
 dev_dependencies:
   flutter_test:

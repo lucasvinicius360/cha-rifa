@@ -2,6 +2,7 @@ import 'package:cha_rifa/screens/add/add.dart';
 import 'package:cha_rifa/screens/charts/charts.dart';
 import 'package:cha_rifa/screens/charts/data.dart';
 import 'package:cha_rifa/screens/charts/view_charts.dart';
+import 'package:cha_rifa/screens/dashboard/dashboard.dart';
 import 'package:cha_rifa/screens/home/home_page_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -212,7 +213,7 @@ class _DrawerThreeState extends State<DrawerThree> {
                       Navigator.push(
                           context,
                           PageTransition(
-                            child:  ViewCharts(),
+                            child:  Dashboard(),
                             type: PageTransitionType.size,
                             alignment: Alignment.center,
                             duration: const Duration(milliseconds: 700),

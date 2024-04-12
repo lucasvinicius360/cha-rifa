@@ -62,16 +62,27 @@ class UsersRepositores extends ChangeNotifier {
   }
 
   Future<List<Map<String, dynamic>>> getNumbers() async {
-  final db = await DB.instance.database;
-  var results = await db.query('users', columns: ['number']);
-  List<Map<String, dynamic>> numbers = [];
-  for (var result in results) {
-    numbers.add({'number': result['number']});
+    final db = await DB.instance.database;
+    var results = await db.query('users', columns: ['number']);
+    List<Map<String, dynamic>> numbers = [];
+    for (var result in results) {
+      numbers.add({'number': result['number']});
+    }
+    return numbers;
   }
-  return numbers;
+
+Future<int> getTotalPayment() async {
+  db = await DB.instance.database;
+  final result = await db.rawQuery('SELECT SUM(number) as total FROM users WHERE payment = ?', [1]);
+  int totalPayment = (result.first['total'] ?? 0) as int; // Conversão explícita para int
+  return totalPayment;
 }
 
-
-
+Future<int> getTotalNotPayment() async {
+  db = await DB.instance.database;
+  final result = await db.rawQuery('SELECT SUM(number) as total FROM users WHERE payment = ?', [0]);
+  int totalPayment = (result.first['total'] ?? 0) as int; // Conversão explícita para int
+  return totalPayment;
+}
 
 }
