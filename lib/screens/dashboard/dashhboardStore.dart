@@ -12,8 +12,10 @@ abstract class _DashhboardStore with Store {
   @observable
   int peopleNotPay = 0;
 
-  final UsersRepositores usersRepository = UsersRepositores();
+  @observable
+  List<int> unsaved = [];
 
+  final UsersRepositores usersRepository = UsersRepositores();
 
   @action
   Future<void> getTotalPayment() async {
@@ -23,5 +25,17 @@ abstract class _DashhboardStore with Store {
   @action
   Future<void> getTotalNotPayment() async {
     peopleNotPay = await usersRepository.getTotalNotPayment();
+  }
+
+  @action
+  void addToUnsaved() {
+    unsaved.addAll([peoplePay, peopleNotPay, peoplePay + peopleNotPay, 100]);
+  }
+
+  @action
+  double getTotalPay() {
+
+    double po = (peoplePay + peopleNotPay).toDouble();
+    return po;
   }
 }

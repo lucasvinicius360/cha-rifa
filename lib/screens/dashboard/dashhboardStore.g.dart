@@ -41,11 +41,70 @@ mixin _$DashhboardStore on _DashhboardStore, Store {
     });
   }
 
+  late final _$unsavedAtom =
+      Atom(name: '_DashhboardStore.unsaved', context: context);
+
+  @override
+  List<int> get unsaved {
+    _$unsavedAtom.reportRead();
+    return super.unsaved;
+  }
+
+  @override
+  set unsaved(List<int> value) {
+    _$unsavedAtom.reportWrite(value, super.unsaved, () {
+      super.unsaved = value;
+    });
+  }
+
+  late final _$getTotalPaymentAsyncAction =
+      AsyncAction('_DashhboardStore.getTotalPayment', context: context);
+
+  @override
+  Future<void> getTotalPayment() {
+    return _$getTotalPaymentAsyncAction.run(() => super.getTotalPayment());
+  }
+
+  late final _$getTotalNotPaymentAsyncAction =
+      AsyncAction('_DashhboardStore.getTotalNotPayment', context: context);
+
+  @override
+  Future<void> getTotalNotPayment() {
+    return _$getTotalNotPaymentAsyncAction
+        .run(() => super.getTotalNotPayment());
+  }
+
+  late final _$_DashhboardStoreActionController =
+      ActionController(name: '_DashhboardStore', context: context);
+
+  @override
+  void addToUnsaved() {
+    final _$actionInfo = _$_DashhboardStoreActionController.startAction(
+        name: '_DashhboardStore.addToUnsaved');
+    try {
+      return super.addToUnsaved();
+    } finally {
+      _$_DashhboardStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  double getTotalPay() {
+    final _$actionInfo = _$_DashhboardStoreActionController.startAction(
+        name: '_DashhboardStore.getTotalPay');
+    try {
+      return super.getTotalPay();
+    } finally {
+      _$_DashhboardStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 peoplePay: ${peoplePay},
-peopleNotPay: ${peopleNotPay}
+peopleNotPay: ${peopleNotPay},
+unsaved: ${unsaved}
     ''';
   }
 }

@@ -73,16 +73,18 @@ class UsersRepositores extends ChangeNotifier {
 
 Future<int> getTotalPayment() async {
   db = await DB.instance.database;
-  final result = await db.rawQuery('SELECT SUM(number) as total FROM users WHERE payment = ?', [1]);
-  int totalPayment = (result.first['total'] ?? 0) as int; // Conversão explícita para int
+  final result = await db.rawQuery('SELECT * FROM users WHERE payment = ?', [1]);
+  int totalPayment = (result.length ); // Conversão explícita para int
+  print("'totalPayment': $totalPayment");
   return totalPayment;
 }
 
 Future<int> getTotalNotPayment() async {
   db = await DB.instance.database;
-  final result = await db.rawQuery('SELECT SUM(number) as total FROM users WHERE payment = ?', [0]);
-  int totalPayment = (result.first['total'] ?? 0) as int; // Conversão explícita para int
-  return totalPayment;
+  final result = await db.rawQuery('SELECT * FROM users WHERE payment = ?', [0]);
+  int totalNotPayment = (result.length); // Conversão explícita para int
+  print(totalNotPayment);
+  return totalNotPayment;
 }
 
 }
