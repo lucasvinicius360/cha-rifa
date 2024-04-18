@@ -154,11 +154,10 @@ class _AddUserScreenState extends State<AddUserScreen> {
                                 (e) => DropdownMenuItem<String>(
                                   // Alteração aqui
                                   child: Text('Numero: ' + e.toString(),
-                                      style: GoogleFonts.bebasNeue(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 20,
-                                        color: Color.fromARGB(255, 18, 18, 18),
-                                      )),
+                                      style: TextStyle(
+                                          fontSize: 17 ,
+                                          fontWeight: FontWeight.w700,
+                                          letterSpacing: -1.5)),
                                   value: e.toString(),
                                 ),
                               )

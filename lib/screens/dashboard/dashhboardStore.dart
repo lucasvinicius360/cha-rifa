@@ -17,6 +17,11 @@ abstract class _DashhboardStore with Store {
 
   final UsersRepositores usersRepository = UsersRepositores();
 
+
+
+
+
+
   @action
   Future<void> getTotalPayment() async {
     peoplePay = await usersRepository.getTotalPayment();

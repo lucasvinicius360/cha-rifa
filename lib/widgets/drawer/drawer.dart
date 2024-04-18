@@ -203,7 +203,7 @@ class _DrawerThreeState extends State<DrawerThree> {
                 ListTile(
                     leading:
                         SizedBox(child: Icon(CupertinoIcons.settings_solid)),
-                    title: Text('Settings',style: GoogleFonts.bebasNeue(
+                    title: Text('Dashboard',style: GoogleFonts.bebasNeue(
                           fontWeight: FontWeight.w500,
                           fontSize: 20,
                           color: Color.fromARGB(255, 18, 18, 18),
