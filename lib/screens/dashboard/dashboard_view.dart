@@ -62,26 +62,11 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
             ),
-            // Observer(
-            //     builder: (_) => Row(
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //           crossAxisAlignment: CrossAxisAlignment.center,
-            //       children: [
-            //         Text(
-            //               'Total de pessoas ',
-            //               style: TextStyle(
-            //                   fontSize: 20,
-            //                   fontWeight: FontWeight.w700,
-            //                   letterSpacing: -1.5,
-            //                   color: Color.fromARGB(255, 250, 250, 250),),
-            //             ),
-            //       ],
-            //     )),
+            
             Observer(builder: (_) => loadGrafico()),
-
             Observer(
                 builder: (_) => Container(
-                      width: 250,
+                      width: 290,
                       padding: EdgeInsets.all(8.0),
                       margin: EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
@@ -107,16 +92,26 @@ class _DashboardState extends State<Dashboard> {
                       ),
                       child: Column(
                         children: [
-                          Text(
-                            'Total De Participantes' +
-                                '   ' +
-                                '${dashboardStore.peopleNotPay + dashboardStore.peoplePay}',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: -1.5,
-                              color: Color(0xFF0D0F14),
-                            ),
+                          Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(CupertinoIcons.person_3_fill),
+                                onPressed: () {},
+                                color: Colors.grey,
+                                iconSize: 40,
+                              ),
+                              Text(
+                                'Total De Participantes' +
+                                    '   ' +
+                                    '${dashboardStore.peopleNotPay + dashboardStore.peoplePay}',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: -1.5,
+                                  color: Color(0xFF0D0F14),
+                                ),
+                              ),
+                            ],
                           ),
                           Divider(
                             height: 2,
@@ -201,31 +196,6 @@ class _DashboardState extends State<Dashboard> {
                   });
                 }),
               )))),
-      // Column(
-      //   children: [
-      //     Observer(
-      //         builder: (_) => Text(
-      //               'Total de pessoas que não pagaram: ${dashboardStore.peopleNotPay}',
-      //               style: TextStyle(
-      //                   fontSize: 18,
-      //                   fontWeight: FontWeight.w700,
-      //                   letterSpacing: -1.5,
-      //                   color: Colors.teal),
-      //             )),
-      //     Observer(
-      //       builder: (_) {
-      //         return Text(
-      //           'Total de pessoas que  pagaram: ${dashboardStore.peoplePay}',
-      //           style: TextStyle(
-      //               fontSize: 18,
-      //               fontWeight: FontWeight.w700,
-      //               letterSpacing: -1.5,
-      //               color: Colors.teal),
-      //         );
-      //       },
-      //     )
-      //   ],
-      // )
     ]);
   }
 

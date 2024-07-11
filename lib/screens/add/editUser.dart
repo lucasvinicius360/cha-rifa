@@ -128,7 +128,7 @@ class _EditUserState extends State<EditUser> {
       // Atualiza os dados do usuário com os valores fornecidos.
       usersRepository.updateUsers(
         widget.user!.id, // ID do usuário.
-        widget.user!.name, // Nome do usuário.
+        nameController.text, // Nome do usuário.
         numbers, // Número selecionado.
         checkValue, // Valor booleano indicando se a fralda foi recebida ou não.
       );
